@@ -85,7 +85,7 @@ export default function ProductCard({ product, onAdd }) {
           {product.name}
         </h3>
         <span style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--color-primary)', flexShrink: 0 }}>
-          ${product.price.toLocaleString('es-MX')}
+          Q.{product.price.toLocaleString('es-GT')}
         </span>
       </div>
     </article>

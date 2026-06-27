@@ -20,23 +20,25 @@ const s = {
 const WA_NUMBER = '50241656808'
 
 function buildWhatsAppUrl(items, total) {
-  const lines = items.map((i) => `• ${i.name} x${i.qty} — $${(i.price * i.qty).toLocaleString('es-MX')}`)
+  const lines = items.map((i) => `• ${i.name} x${i.qty} — Q.${(i.price * i.qty).toLocaleString('es-GT')}`)
   const msg = [
     '¡Hola! Quiero hacer un pedido 🍫',
     '',
     ...lines,
     '',
-    `*Total: $${total.toLocaleString('es-MX')}*`,
+    `*Total: Q.${total.toLocaleString('es-GT')}*`,
   ].join('\n')
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`
 }
 
-export default function Cart({ items, onClose, onUpdate }) {
+export default function Cart({ items, onClose, onUpdate, onOrder }) {
   const total = items.reduce((sum, i) => sum + i.price * i.qty, 0)
 
   function handleCheckout() {
     if (items.length === 0) return
     window.open(buildWhatsAppUrl(items, total), '_blank', 'noopener,noreferrer')
+    onOrder()
+    onClose()
   }
 
   return (
@@ -107,7 +109,7 @@ export default function Cart({ items, onClose, onUpdate }) {
                     {item.name}
                   </p>
                   <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
-                    ${item.price.toLocaleString('es-MX')} c/u
+                    Q.{item.price.toLocaleString('es-GT')} c/u
                   </p>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
@@ -127,7 +129,7 @@ export default function Cart({ items, onClose, onUpdate }) {
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.125rem' }}>
             <span style={{ fontSize: '0.9375rem', color: 'var(--color-text-muted)' }}>Total</span>
             <span style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--color-primary)' }}>
-              ${total.toLocaleString('es-MX')}
+              Q.{total.toLocaleString('es-GT')}
             </span>
           </div>
           <button
