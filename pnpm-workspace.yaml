@@ -1,0 +1,12 @@
+packages:
+  - '.'
+
+# esbuild: native binary extractor only — no CVEs, maintained by evanw (Vite dependency)
+onlyBuiltDependencies:
+  - esbuild
+
+preferFrozenLockfile: true
+verifyStoreIntegrity: true
+auditLevel: high
+allowBuilds:
+  esbuild: true
