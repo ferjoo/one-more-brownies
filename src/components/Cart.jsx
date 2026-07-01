@@ -22,7 +22,7 @@ const WA_NUMBER = '50247676870'
 function buildWhatsAppUrl(items, total) {
   const lines = items.map((i) => `• ${i.name} x${i.qty} — Q.${(i.price * i.qty).toLocaleString('es-GT')}`)
   const msg = [
-    '¡Hola! Quiero hacer un pedido 🍫',
+    '¡Hola! Quiero hacer un pedido',
     '',
     ...lines,
     '',
